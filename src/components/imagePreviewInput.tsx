@@ -42,12 +42,12 @@ export const ImagePreviewInput = () => {
 
       <div className='flex flex-col gap-4 m-4 text-xl'>
 
-        <label><button className='text-blue-400 hover:text-blue-200' onClick={onClick}>Select</button> or drop your files to upload them</label>
+        <label><button className='text-blue-400 hover:text-blue-600' onClick={onClick}>Select</button> or drop your files to upload them</label>
         <input className='hidden' ref={inputRef} type='file' placeholder='Manga' accept='image/*' multiple onChange={onChange} />
 
         <div className='flex justify-between items-center gap-2'>
           <button className='text-blue-400 border-2 rounded-xl border-blue-400 hover:text-blue-200 hover:border-blue-200 self-start py-2 p-4' onClick={clearFiles}>Clear</button>
-          <button className='bg-blue-400 hover:bg-blue-200 text-white text-2xl rounded-xl px-8 py-2 self-end' type='submit'>Translate</button>
+          <button className='bg-blue-600 hover:bg-blue-400 text-white text-2xl rounded-xl px-8 py-2 self-end transition-colors' type='submit'>Translate</button>
         </div>
 
         {error !== null && <p className='text-red-500 self-center'>{error}</p>}
