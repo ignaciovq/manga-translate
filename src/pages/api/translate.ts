@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { translate } from '@/services/translate'
 
-interface RequestQuery {
+interface RequestBody {
   text: string
   fromLanguage: string
   toLanguage: string
@@ -13,7 +13,7 @@ export default async function handler (
 ) {
   if (req.method !== 'POST') return res.status(405).end()
 
-  const { text, fromLanguage, toLanguage } = req.body as RequestQuery
+  const { text, fromLanguage, toLanguage } = req.body as RequestBody
 
   if ([text.trim(), fromLanguage.trim(), toLanguage.trim()].includes('')) return res.status(400).end()
 
