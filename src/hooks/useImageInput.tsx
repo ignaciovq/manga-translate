@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { createPreview } from '../utils/createImagePreview'
+import { createPreview } from '@/utils/createImagePreview'
 
 export interface MangaFile {
   name: string
@@ -68,9 +68,19 @@ export function useImageInput () {
     current.click()
   }
 
+  const removeFile = (index: number) => {
+    setMangaPages(prev => prev.filter((manga, i) => i !== index))
+    setUploadPreview(prev => prev.filter((manga, i) => i !== index))
+    const { current } = inputRef as unknown as { current: HTMLInputElement }
+    current.value = ''
+  }
+
   const clearFiles = () => {
     setMangaPages([])
     setUploadPreview([])
+    setError(null)
+    const { current } = inputRef as unknown as { current: HTMLInputElement }
+    current.value = ''
   }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -90,6 +100,7 @@ export function useImageInput () {
     onDrop,
     onChange,
     onClick,
+    removeFile,
     clearFiles,
     onSubmit
   }
