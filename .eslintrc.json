@@ -8,6 +8,8 @@
   },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
-    "no-useless-return": "off"
+    "no-useless-return": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/return-await": "off"
   }
 }
