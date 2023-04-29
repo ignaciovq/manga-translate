@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { translate } from '@/services/translate'
 
 interface RequestBody {
   text: string
@@ -18,10 +17,15 @@ export default async function handler (
   if ([text.trim(), fromLanguage.trim(), toLanguage.trim()].includes('')) return res.status(400).end()
 
   try {
-    const translatedText = await translate({ text, fromLanguage, toLanguage })
-    return res.status(200).json({ result: translatedText })
+    const url = new URL('https://api.pawan.krd/mtranslate')
+    url.searchParams.append('from', fromLanguage)
+    url.searchParams.append('to', toLanguage)
+    url.searchParams.append('text', text)
+    const response = await fetch(url)
+    const { translated } = await response.json()
+    return res.status(200).json({ result: translated })
   } catch (error) {
-    console.error(error)
+    console.error('Error en el SERVER', error)
     return res.status(500).end()
   }
 }
